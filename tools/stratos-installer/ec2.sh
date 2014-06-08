@@ -53,6 +53,8 @@ sed -i "s@OPENSTACK_PROVIDER_START@!--@g" repository/conf/cloud-controller.xml
 sed -i "s@OPENSTACK_PROVIDER_END@--@g" repository/conf/cloud-controller.xml
 sed -i "s@VCLOUD_PROVIDER_START@!--@g" repository/conf/cloud-controller.xml
 sed -i "s@VCLOUD_PROVIDER_END@--@g" repository/conf/cloud-controller.xml
+sed -i "s@GCE_PROVIDER_START@!--@g" repository/conf/cloud-controller.xml
+sed -i "s@GCE_PROVIDER_END@--@g" repository/conf/cloud-controller.xml
 
 popd
 

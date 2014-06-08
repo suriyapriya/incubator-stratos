@@ -265,6 +265,12 @@
             <artifactId>org.wso2.carbon.ntask.core</artifactId>
             <version>4.2.0</version>
         </dependency>
+        <!-- jclouds GCE provider -->
+        <dependency>
+            <groupId>org.apache.jclouds.labs</groupId>
+            <artifactId>google-compute-engine</artifactId>
+            <version>${jclouds.version}</version>
+        </dependency>
     </dependencies>
     <properties>
         <gson2.version>2.2</gson2.version>
