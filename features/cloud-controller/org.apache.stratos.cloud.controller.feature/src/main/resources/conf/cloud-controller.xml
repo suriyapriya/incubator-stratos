@@ -73,5 +73,11 @@
 			<property name="X" value="x" />
 			<property name="Y" value="y" />
 		</iaasProvider>
+		<iaasProvider type="gce" name="GCE specific details">
+            		<className>org.apache.stratos.cloud.controller.iaases.GCEIaas</className>
+			<provider>gce</provider>
+			<identity svns:secretAlias="cloud.controller.gce.identity">demo:demo</identity>
+			<credential svns:secretAlias="cloud.controller.gce.credential">gce</credential>
+		</iaasProvider>
 	</iaasProviders>
 </cloudController>
