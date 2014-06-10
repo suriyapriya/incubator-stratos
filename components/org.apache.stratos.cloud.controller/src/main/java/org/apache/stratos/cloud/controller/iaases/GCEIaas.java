@@ -28,7 +28,7 @@ import org.apache.stratos.cloud.controller.exception.CloudControllerException;
 import org.apache.stratos.cloud.controller.interfaces.Iaas;
 import org.apache.stratos.cloud.controller.jcloud.ComputeServiceBuilderUtil;
 import org.apache.stratos.cloud.controller.pojo.IaasProvider;
-import org.apache.stratos.cloud.controller.validate.VCloudPartitionValidator;
+import org.apache.stratos.cloud.controller.validate.GCEPartitionValidator;
 import org.apache.stratos.cloud.controller.validate.interfaces.PartitionValidator;
 import org.jclouds.compute.domain.NodeMetadata;
 import org.jclouds.compute.domain.Template;
@@ -41,7 +41,7 @@ import org.wso2.carbon.utils.CarbonUtils;
 public class GCEIaas extends Iaas {
 
 
-	private static final Log log = LogFactory.getLog(VCloudIaas.class);
+	private static final Log log = LogFactory.getLog(GCEIaas.class);
 	
 	private static final String SHELL_TYPE = "shellType";
 	private static final String SCRIPTS_PATH = "scripts";
@@ -227,7 +227,7 @@ public class GCEIaas extends Iaas {
 
     @Override
     public PartitionValidator getPartitionValidator() {
-        return new VCloudPartitionValidator();
+        return new GCEPartitionValidator();
     }
 
 	@Override
