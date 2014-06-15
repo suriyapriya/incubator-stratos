@@ -22,7 +22,7 @@
     <parent>
         <groupId>org.apache.jclouds.labs</groupId>
         <artifactId>jclouds-labs-google</artifactId>
-        <version>1.7.3</version>
+        <version>1.7.1</version>
     </parent>
 
     <!-- TODO: when out of labs, switch to org.jclouds.provider -->
@@ -34,7 +34,7 @@
     <packaging>bundle</packaging>
 
     <properties>
-        <jclouds.version>1.7.3</jclouds.version>
+        <jclouds.version>1.7.1</jclouds.version>
         <test.google-compute-engine.identity>Email associated with the Google API client_id
         </test.google-compute-engine.identity>
         <test.google-compute-engine.credential>Private key (PKCS12 file) associated with the Google API client_id
