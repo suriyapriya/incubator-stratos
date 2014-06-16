@@ -176,6 +176,31 @@
             <artifactId>andes-client</artifactId>
 	    <version>0.13.wso2v8</version>
         </dependency>
+        <dependency>
+           <groupId>org.apache.jclouds</groupId>
+           <artifactId>jclouds-core</artifactId>
+           <version>1.7.3</version>
+        </dependency>
+        <dependency>
+           <groupId>org.apache.jclouds</groupId>
+           <artifactId>jclouds-compute</artifactId>
+           <version>1.7.3</version>
+         </dependency>
+         <dependency>
+           <groupId>org.apache.jclouds.driver</groupId>
+           <artifactId>jclouds-sshj</artifactId>
+           <version>1.7.3</version>
+         </dependency>
+         <dependency>
+           <groupId>org.apache.jclouds.driver</groupId>
+           <artifactId>jclouds-log4j</artifactId>
+           <version>1.7.3</version>
+         </dependency>
+         <dependency>
+           <groupId>org.apache.jclouds.driver</groupId>
+           <artifactId>jclouds-enterprise</artifactId>
+           <version>1.7.3</version>
+         </dependency>
     </dependencies>
 
     <build>

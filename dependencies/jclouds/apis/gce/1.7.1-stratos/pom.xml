@@ -44,9 +44,9 @@
         <test.google-compute-engine.template>imageId=debian-7-wheezy-v20131120,locationId=us-central1-a,minRam=2048</test.google-compute-engine.template>
         <jclouds.osgi.export>org.jclouds.gce*;version="${project.version}"</jclouds.osgi.export>
         <jclouds.osgi.import>
-          org.jclouds.compute.internal;version="${jclouds.version}",
-          org.jclouds.rest.internal;version="${jclouds.version}",
-          org.jclouds*;version="${jclouds.version}",
+          org.jclouds.compute.internal;version="1.7.1",
+          org.jclouds.rest.internal;version="1.7.1",
+          org.jclouds*;version="1.7.1",
           *
         </jclouds.osgi.import>
     </properties>
