@@ -15,4 +15,4 @@
 # limitations under the License.
 #
 
-org.jclouds.googlecomputeengine.GoogleComputeEngineApiMetadata
+org.jclouds.oauth.v2.OAuthApiMetadata
