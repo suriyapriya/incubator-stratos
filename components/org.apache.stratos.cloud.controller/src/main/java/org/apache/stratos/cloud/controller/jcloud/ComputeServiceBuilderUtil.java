@@ -85,7 +85,7 @@ public class ComputeServiceBuilderUtil {
         if (iaasProvider == "gce")
             iaasProvider = "google-compute-engine";
         ContextBuilder builder =
-            ContextBuilder.newBuilder(iaasProvider())
+            ContextBuilder.newBuilder(iaasProvider)
                           .credentials(iaas.getIdentity(), iaas.getCredential()).modules(modules)
                           .overrides(properties);
 
