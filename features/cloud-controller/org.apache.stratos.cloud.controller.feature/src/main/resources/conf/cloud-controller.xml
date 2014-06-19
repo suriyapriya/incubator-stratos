@@ -75,7 +75,7 @@
 		</iaasProvider>
 		<iaasProvider type="gce" name="GCE specific details">
             		<className>org.apache.stratos.cloud.controller.iaases.GCEIaas</className>
-			<provider>gce</provider>
+			<provider>google-compute-engine</provider>
 			<identity svns:secretAlias="cloud.controller.gce.identity">demo:demo</identity>
 			<credential svns:secretAlias="cloud.controller.gce.credential">gce</credential>
 		</iaasProvider>

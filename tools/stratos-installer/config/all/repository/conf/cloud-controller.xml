@@ -85,7 +85,7 @@
                 </iaasProviderVCLOUD_PROVIDER_END>
         	<GCE_PROVIDER_STARTiaasProvider type="gce" name="GCE specific details">
                 	<className>org.apache.stratos.cloud.controller.iaases.GCEIaas</className>
-                        <provider>gce</provider>
+                        <provider>google-compute-engine</provider>
                         <identity svns:secretAlias="cloud.controller.gce.identity">GCE_IDENTITY</identity>
                         <credential svns:secretAlias="cloud.controller.gce.credential">GCE_CREDENTIAL</credential>
                         <property name="jclouds.endpoint" value="GCE_ENDPOINT" />

@@ -123,7 +123,7 @@
         </dependency-->
         <dependency>
             <groupId>org.apache.stratos</groupId>
-            <artifactId>gce</artifactId>
+            <artifactId>google-compute-engine</artifactId>
             <version>1.7.1-stratos</version>
         </dependency>
          <dependency>
@@ -176,7 +176,7 @@
             <artifactId>andes-client</artifactId>
 	    <version>0.13.wso2v8</version>
         </dependency>
-         <dependency>
+         <!--dependency>
            <groupId>org.apache.jclouds.labs</groupId>
            <artifactId>google-compute-engine</artifactId>
            <version>${jclouds.version}</version>
@@ -185,7 +185,7 @@
            <groupId>org.apache.jclouds.labs</groupId>
            <artifactId>oauth</artifactId>
            <version>${jclouds.version}</version>
-         </dependency>
+         </dependency-->
     </dependencies>
 
     <build>
@@ -247,7 +247,7 @@
                                 <bundleDef>org.apache.stratos:ec2:1.7.1-stratos</bundleDef>
                                 <bundleDef>org.apache.stratos:openstack-nova:1.7.1-stratos</bundleDef>
                                 <!--bundleDef>org.apache.stratos:vcloud:1.7.1-stratos</bundleDef-->
-                                <bundleDef>org.apache.stratos:gce:1.7.1-stratos</bundleDef>
+                                <bundleDef>org.apache.stratos:google-compute-engine:1.7.1-stratos</bundleDef>
                                 <bundleDef>com.jamesmurty.utils.wso2:java-xmlbuilder:0.4.wso2v1</bundleDef>
                                 <bundleDef>org.apache.jclouds.common:openstack-common:${jclouds.version}</bundleDef>
                                 <bundleDef>org.apache.jclouds.api:openstack-keystone:${jclouds.version}</bundleDef>

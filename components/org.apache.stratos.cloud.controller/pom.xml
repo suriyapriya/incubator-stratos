@@ -216,7 +216,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.apache.stratos</groupId>
-			<artifactId>gce</artifactId>
+			<artifactId>google-compute-engine</artifactId>
 			<version>1.7.1-stratos</version>
 		</dependency>
 
