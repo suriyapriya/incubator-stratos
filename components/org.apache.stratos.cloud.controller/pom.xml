@@ -148,7 +148,12 @@
 </dependency>
 
 		<!-- jclouds dependencies -->
-		<dependency>
+                <dependency>
+                    <groupId>org.apache.jclouds.labs</groupId>
+                    <artifactId>google-compute-engine</artifactId>
+                    <version>${jclouds.version}</version>
+                </dependency>
+		<!--dependency>
 			<groupId>org.apache.jclouds</groupId>
 			<artifactId>jclouds-core</artifactId>
 			<version>${jclouds.version}</version>
@@ -157,7 +162,7 @@
 			<groupId>org.apache.jclouds</groupId>
 			<artifactId>jclouds-compute</artifactId>
 			<version>${jclouds.version}</version>
-		</dependency>
+		</dependency-->
 		<dependency>
 			<groupId>org.apache.jclouds.driver</groupId>
 			<artifactId>jclouds-bouncycastle</artifactId>
@@ -271,11 +276,6 @@
             <version>4.2.0</version>
         </dependency>
         <!-- jclouds GCE provider -->
-        <dependency>
-            <groupId>org.apache.jclouds.labs</groupId>
-            <artifactId>google-compute-engine</artifactId>
-            <version>${jclouds.version}</version>
-        </dependency>
         <dependency>
             <groupId>org.apache.jclouds.labs</groupId>
             <artifactId>oauth</artifactId>
