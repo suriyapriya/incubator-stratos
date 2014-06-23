@@ -73,12 +73,16 @@ public class ComputeServiceBuilderUtil {
         // load properties
         for (Map.Entry<String, String> entry : iaas.getProperties().entrySet()) {
             properties.put(entry.getKey(), entry.getValue());
+            log.error(" buildDefaultComputeService " + entry.getKey() + " : " + entry.getValue());
         }
 
         // set modules
         Iterable<Module> modules =
             ImmutableSet.<Module> of(new SshjSshClientModule(), new SLF4JLoggingModule(),
                                      new EnterpriseConfigurationModule());
+
+        log.error("iaasProvider " + iaas);
+        System.out.println("iaasProvider " + iaas);
 
         // build context
         String iaasProvider = iaas.getProvider();
