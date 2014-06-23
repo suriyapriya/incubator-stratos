@@ -72,7 +72,7 @@ public class ComputeServiceBuilderUtil {
 
         // load properties
         for (Map.Entry<String, String> entry : iaas.getProperties().entrySet()) {
-            properties.put(entry.getKey(), entry.getValue());
+            //properties.put(entry.getKey(), entry.getValue());
             log.error(" buildDefaultComputeService " + entry.getKey() + " : " + entry.getValue());
         }
 
@@ -82,7 +82,7 @@ public class ComputeServiceBuilderUtil {
                                      new EnterpriseConfigurationModule());
 
         log.error("iaasProvider " + iaas);
-        System.out.println("iaasProvider " + iaas);
+        log.error("gce identity password " + iaas.getIdentity() + " " + iaas.getCredential());
 
         // build context
         String iaasProvider = iaas.getProvider();
