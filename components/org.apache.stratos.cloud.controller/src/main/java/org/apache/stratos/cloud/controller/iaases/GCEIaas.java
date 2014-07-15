@@ -99,8 +99,8 @@ public class GCEIaas extends Iaas {
 		template.getOptions().as(TemplateOptions.class)
 				.inboundPorts(22, 80, 8080, 443, 8243);
 
-		template.getOptions().as(VCloudTemplateOptions.class)
-				.ipAddressAllocationMode(IpAddressAllocationMode.POOL);
+                //template.getOptions().as(VCloudTemplateOptions.class)
+                //		.ipAddressAllocationMode(IpAddressAllocationMode.POOL);
 
 		// set Template
 		iaasInfo.setTemplate(template);
