@@ -78,6 +78,9 @@
 			<provider>google-compute-engine</provider>
 			<identity svns:secretAlias="cloud.controller.gce.identity">demo:demo</identity>
 			<credential svns:secretAlias="cloud.controller.gce.credential">gce</credential>
+			<property name="network" value="default" />
+			<property name="X" value="x" />
+			<property name="Y" value="y" />
 		</iaasProvider>
 	</iaasProviders>
 </cloudController>

@@ -97,7 +97,8 @@ public class GCEIaas extends Iaas {
 		// this is required in order to avoid creation of additional security
 		// groups by Jclouds.
 		template.getOptions().as(TemplateOptions.class)
-				.inboundPorts(22, 80, 8080, 443, 8243);
+                                .inboundPorts(22, 80, 8080, 443, 8243)
+                                .networks(iaasInfo.getProperty("network"));
 
                 //template.getOptions().as(VCloudTemplateOptions.class)
                 //		.ipAddressAllocationMode(IpAddressAllocationMode.POOL);
@@ -148,7 +149,7 @@ public class GCEIaas extends Iaas {
 			if (log.isWarnEnabled()) {
 				log.warn(String.format("The vCloud Customization script '%s' does not exist",
 						customizationScriptFile.getAbsolutePath()));
-			}
+                        }
 			return;
 		}
 
