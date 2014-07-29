@@ -81,8 +81,39 @@ public class GCEIaas extends Iaas {
 		// set image id specified
 		templateBuilder.imageId(iaasInfo.getImage());
 
+		if(!(iaasInfo instanceof IaasProvider)) {
+			templateBuilder.locationId(iaasInfo.getType());
+		}
+
+		if(iaasInfo.getProperty(CloudControllerConstants.AVAILABILITY_ZONE) != null) {
+			Set<? extends Location> locations = iaasInfo.getComputeService().listAssignableLocations();
+			for(Location location : locations) {
+				if(location.getScope().toString().equalsIgnoreCase(CloudControllerConstants.ZONE_ELEMENT) &&
+					location.getId().equals(iaasInfo.getProperty(CloudControllerConstants.AVAILABILITY_ZONE))) {
+					templateBuilder.locationId(location.getId());
+					log.info("ZONE has been set as " + iaasInfo.getProperty(CloudControllerConstants.AVAILABILITY_ZONE)
+						+ " with id: " + location.getId());
+					break;
+				}
+			}
+		}
+
+		if (iaasInfo.getProperty(CloudControllerConstants.INSTANCE_TYPE) != null) {
+			// set instance type eg: m1.large
+			templateBuilder.hardwareId(iaasInfo.getProperty(CloudControllerConstants.INSTANCE_TYPE));
+		}
+
 		// build the Template
 		Template template = templateBuilder.build();
+
+		if(iaasInfo.getProperty(CloudControllerConstants.AVAILABILITY_ZONE) != null) {
+			if(!template.getLocation().getId().equals(iaasInfo.getProperty(CloudControllerConstants.AVAILABILITY_ZONE))) {
+				log.warn("couldn't find assignable ZONE of id :" +
+				iaasInfo.getProperty(CloudControllerConstants.AVAILABILITY_ZONE) + " in the IaaS. " +
+				"Hence using the default location as " + template.getLocation().getScope().toString() +
+				" with the id " + template.getLocation().getId());
+			}
+		}
 
 		// if you wish to auto assign IPs, instance spawning call should be
 		// blocking, but if you
@@ -97,11 +128,27 @@ public class GCEIaas extends Iaas {
 		// this is required in order to avoid creation of additional security
 		// groups by Jclouds.
 		template.getOptions().as(TemplateOptions.class)
-                                .inboundPorts(22, 80, 8080, 443, 8243)
-                                .networks(iaasInfo.getProperty("network"));
+                                .inboundPorts(22, 80, 8080, 443, 8243);
 
-                //template.getOptions().as(VCloudTemplateOptions.class)
-                //		.ipAddressAllocationMode(IpAddressAllocationMode.POOL);
+		// ability to define tags with Key-value pairs
+		Map<String, String> keyValuePairTagsMap = new HashMap<String, String>();
+
+		for (String propertyKey : iaasInfo.getProperties().keySet()){
+			if(propertyKey.startsWith(CloudControllerConstants.TAGS_AS_KEY_VALUE_PAIRS_PREFIX)) {
+				keyValuePairTagsMap.put(propertyKey.substring(CloudControllerConstants.TAGS_AS_KEY_VALUE_PAIRS_PREFIX.length()),
+					iaasInfo.getProperties().get(propertyKey));
+				template.getOptions()
+				    .userMetadata(keyValuePairTagsMap);
+			}
+		}
+
+		if (iaasInfo.getNetworkInterfaces() != null) {
+			List<String> networks = new ArrayList<String>(iaasInfo.getNetworkInterfaces().length);
+			for (NetworkInterface ni:iaasInfo.getNetworkInterfaces()) {
+				networks.add(ni.getNetworkUuid());
+			}
+			template.getOptions().as(TemplateOptions.class).networks(networks);
+		}
 
 		// set Template
 		iaasInfo.setTemplate(template);
@@ -186,7 +233,7 @@ public class GCEIaas extends Iaas {
 	@Override
 	public boolean createKeyPairFromPublicKey(String region, String keyPairName, String publicKey) {
 
-		// TODO
+		// Not applicable for GCE - Not called by stratos cloud controller as well
 		return false;
 	}
 
@@ -200,36 +247,36 @@ public class GCEIaas extends Iaas {
 
 	@Override
 	public String associatePredefinedAddress(NodeMetadata node, String ip) {
-    	return "";
-    }
+		return "";
+	}
 
 	@Override
 	public void releaseAddress(String ip) {
 		// TODO
 	}
 
-    @Override
-    public boolean isValidRegion(String region) {
-        // TODO Auto-generated method stub
-        return false;
-    }
+	@Override
+	public boolean isValidRegion(String region) {
+		// TODO called by corresponding partition validator
+		return false;
+	}
 
-    @Override
-    public boolean isValidZone(String region, String zone) {
-        // TODO Auto-generated method stub
-        return true;
-    }
+	@Override
+	public boolean isValidZone(String region, String zone) {
+		// TODO called by corresponding partition validator
+		return true;
+	}
 
-    @Override
-    public boolean isValidHost(String zone, String host) {
-        // TODO Auto-generated method stub
-        return true;
-    }
+	@Override
+	public boolean isValidHost(String zone, String host) {
+		// TODO Not called by cloud controller
+		return true;
+	}
 
-    @Override
-    public PartitionValidator getPartitionValidator() {
-        return new GCEPartitionValidator();
-    }
+	@Override
+	public PartitionValidator getPartitionValidator() {
+		return new GCEPartitionValidator();
+	}
 
 	@Override
 	public String createVolume(int sizeGB) {
@@ -255,9 +302,8 @@ public class GCEIaas extends Iaas {
 		
 	}
 
-    @Override
-    public String getIaasDevice(String device) {
-        return device;
-    }
-
+	@Override
+	public String getIaasDevice(String device) {
+		return device;
+	}
 }
