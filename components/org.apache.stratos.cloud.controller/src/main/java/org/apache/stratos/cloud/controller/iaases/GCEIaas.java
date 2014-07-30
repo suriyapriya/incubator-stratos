@@ -181,67 +181,11 @@ public class GCEIaas extends Iaas {
 		// Payload is a String value
 		String payload = new String(iaasInfo.getPayload());
 
-		log.info("setDynamicPayload " + payload);
+		log.info("setDynamicPayload2 " + payload);
 
-		String shellType = iaasInfo.getProperty(SHELL_TYPE);
-
-		if (shellType == null || shellType.isEmpty()) {
-			if (log.isDebugEnabled()) {
-				log.debug("Shell Type for vCloud Customization script not found from properties");
-			}
-			return;
-		}
-
-		if (log.isDebugEnabled()) {
-			log.debug(String.format("Shell Type '%s' will be used for vCloud Customization script", shellType));
-		}
-
-		if (log.isDebugEnabled()) {
-			log.debug(String.format("Payload '%s' will be used for vCloud Customization script", payload));
-		}
-
-		Template template = iaasInfo.getTemplate();
-
-		File scriptPath = new File(CarbonUtils.getCarbonConfigDirPath(), SCRIPTS_PATH);
-
-		File customizationScriptFile = new File(new File(scriptPath, shellType), CUSTOMIZATION_SCRIPT);
-
-		if (!customizationScriptFile.exists()) {
-			if (log.isWarnEnabled()) {
-				log.warn(String.format("The vCloud Customization script '%s' does not exist",
-						customizationScriptFile.getAbsolutePath()));
-                        }
-			return;
-		}
-
-		String customizationScript = null;
-
-		try {
-			customizationScript = FileUtils.readFileToString(customizationScriptFile);
-		} catch (IOException e) {
-			if (log.isErrorEnabled()) {
-				log.error(
-						String.format("Error reading the vCloud Customization script '%s'",
-								customizationScriptFile.getAbsolutePath()), e);
-			}
-		}
-
-		if (customizationScript == null || customizationScript.isEmpty()) {
-			if (log.isDebugEnabled()) {
-				log.debug("No content vCloud Customization script not found from properties");
-			}
-			return;
-		}
-
-		// Set payload
-		customizationScript = customizationScript.replaceAll(PAYLOAD, payload);
-
-		if (log.isDebugEnabled()) {
-			log.debug(String.format("The vCloud Customization script\n%s", customizationScript));
-		}
-
-		// Run the script
-		template.getOptions().runScript(customizationScript);
+		Map<String, String> keyValuePairTagsMap = new HashMap<String, String>();
+		keyValuePairTagsMap.put("stratos_usermetadata", payload);
+		iaasInfo.getTemplate().getOptions().userMetadata(keyValuePairTagsMap);
 	}
 
 	@Override
