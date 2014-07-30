@@ -34,9 +34,8 @@ import org.jclouds.compute.domain.NodeMetadata;
 import org.jclouds.compute.domain.Template;
 import org.jclouds.compute.domain.TemplateBuilder;
 import org.jclouds.compute.options.TemplateOptions;
-import org.jclouds.vcloud.compute.options.VCloudTemplateOptions;
-import org.jclouds.vcloud.domain.network.IpAddressAllocationMode;
 import org.wso2.carbon.utils.CarbonUtils;
+import org.apache.stratos.cloud.controller.util.CloudControllerConstants;
 
 public class GCEIaas extends Iaas {
 
@@ -140,14 +139,17 @@ public class GCEIaas extends Iaas {
 				template.getOptions()
 				    .userMetadata(keyValuePairTagsMap);
 			}
+			log.info("usermeta data key:"+ propertyKey + " value: " + iaasInfo.getProperties().get(propertyKey));
 		}
 
 		if (iaasInfo.getNetworkInterfaces() != null) {
 			List<String> networks = new ArrayList<String>(iaasInfo.getNetworkInterfaces().length);
 			for (NetworkInterface ni:iaasInfo.getNetworkInterfaces()) {
 				networks.add(ni.getNetworkUuid());
+				log.info("using network interface " + ni.getNetworkUuid());
 			}
 			template.getOptions().as(TemplateOptions.class).networks(networks);
+			log.info("using network interface " + networks);
 		}
 
 		// set Template
@@ -181,6 +183,8 @@ public class GCEIaas extends Iaas {
 
 		// Payload is a String value
 		String payload = new String(iaasInfo.getPayload());
+
+		log.info("setDynamicPayload " + payload);
 
 		if (log.isDebugEnabled()) {
 			log.debug(String.format("Payload '%s' will be used for vCloud Customization script", payload));
