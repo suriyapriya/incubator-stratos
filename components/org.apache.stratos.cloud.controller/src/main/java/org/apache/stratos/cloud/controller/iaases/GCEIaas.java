@@ -77,6 +77,8 @@ public class GCEIaas extends Iaas {
 			throw new CloudControllerException(msg);
 		}
 
+		log.info("gce buildTemplate");
+
 		TemplateBuilder templateBuilder = iaasInfo.getComputeService()
 				.templateBuilder();
 
@@ -132,6 +134,11 @@ public class GCEIaas extends Iaas {
 		template.getOptions().as(TemplateOptions.class)
                                 .inboundPorts(22, 80, 8080, 443, 8243);
 
+		if (iaasInfo.getProperty(CloudControllerConstants.AVAILABILITY_ZONE) != null) {
+			templateBuilder.locationId(iaasInfo.getProperty(CloudControllerConstants.AVAILABILITY_ZONE));
+			log.debug("setting location to " + iaasInfo.getProperty(CloudControllerConstants.AVAILABILITY_ZONE));
+		}
+
 		// ability to define tags with Key-value pairs
 		Map<String, String> keyValuePairTagsMap = new HashMap<String, String>();
 
@@ -171,6 +178,11 @@ public class GCEIaas extends Iaas {
 			return;
 		}
 
+		// Payload is a String value
+		String payload = new String(iaasInfo.getPayload());
+
+		log.info("setDynamicPayload " + payload);
+
 		String shellType = iaasInfo.getProperty(SHELL_TYPE);
 
 		if (shellType == null || shellType.isEmpty()) {
@@ -183,11 +195,6 @@ public class GCEIaas extends Iaas {
 		if (log.isDebugEnabled()) {
 			log.debug(String.format("Shell Type '%s' will be used for vCloud Customization script", shellType));
 		}
-
-		// Payload is a String value
-		String payload = new String(iaasInfo.getPayload());
-
-		log.info("setDynamicPayload " + payload);
 
 		if (log.isDebugEnabled()) {
 			log.debug(String.format("Payload '%s' will be used for vCloud Customization script", payload));
