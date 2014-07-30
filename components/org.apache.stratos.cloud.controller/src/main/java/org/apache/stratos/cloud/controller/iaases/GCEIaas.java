@@ -20,6 +20,7 @@ package org.apache.stratos.cloud.controller.iaases;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.*;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
@@ -28,6 +29,7 @@ import org.apache.stratos.cloud.controller.exception.CloudControllerException;
 import org.apache.stratos.cloud.controller.interfaces.Iaas;
 import org.apache.stratos.cloud.controller.jcloud.ComputeServiceBuilderUtil;
 import org.apache.stratos.cloud.controller.pojo.IaasProvider;
+import org.apache.stratos.cloud.controller.pojo.NetworkInterface;
 import org.apache.stratos.cloud.controller.validate.GCEPartitionValidator;
 import org.apache.stratos.cloud.controller.validate.interfaces.PartitionValidator;
 import org.jclouds.compute.domain.NodeMetadata;
@@ -35,6 +37,7 @@ import org.jclouds.compute.domain.Template;
 import org.jclouds.compute.domain.TemplateBuilder;
 import org.jclouds.compute.options.TemplateOptions;
 import org.wso2.carbon.utils.CarbonUtils;
+import org.jclouds.domain.Location;
 import org.apache.stratos.cloud.controller.util.CloudControllerConstants;
 
 public class GCEIaas extends Iaas {
